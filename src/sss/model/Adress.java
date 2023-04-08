@@ -2,6 +2,7 @@ package sss.model;
 
 public class Adress {
 
+	int id ;
 	String Street;
 	String StreetNubmer;
 	String City;
@@ -30,11 +31,26 @@ public class Adress {
 	public void setCountry(String country) {
 		Country = country;
 	}
-	public Adress(String street, String streetNubmer, String city, String country) {
+	public Adress(int id,String street, String streetNubmer, String city, String country) {
 		super();
+		this.id = id;
 		Street = street;
 		StreetNubmer = streetNubmer;
 		City = city;
 		Country = country;
+	}
+	public Adress(String street, String streetNubmer, String city, String country) {
+		super();
+	
+		Street = street;
+		StreetNubmer = streetNubmer;
+		City = city;
+		Country = country;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 }

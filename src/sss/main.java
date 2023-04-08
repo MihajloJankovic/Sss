@@ -8,14 +8,17 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Dao.DaoUser;
+import sss.model.User;
 
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.Console;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class main extends JFrame {
+	DaoUser userdao = new DaoUser();
 
 	private JPanel contentPane;
 
@@ -47,6 +50,13 @@ public class main extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Login");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				
+				
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewButton.setBounds(375, 97, 190, 85);
 		contentPane.add(btnNewButton);
