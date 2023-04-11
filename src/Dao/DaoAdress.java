@@ -1,10 +1,6 @@
 package Dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.*;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +37,31 @@ public class DaoAdress {
 			}catch(Exception e){ System.out.println(e);}
 		
 		return null;  
+			
+	}
+	public int Save(Adress adres) throws ClassNotFoundException, SQLException
+	{
+		 
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection(  
+			"jdbc:mysql://localhost:3306/sss","root","root");  
+
+			PreparedStatement stmt=con.prepareStatement("INSERT INTO sss.adress(`Street`,`StreetNubmer`,`City`,`Country`)VALUES(?,?,?,?);", Statement.RETURN_GENERATED_KEYS);  
+			stmt.setString(1,adres.getStreet());
+			stmt.setString(2,adres.getStreetNubmer());
+			stmt.setString(3,adres.getCity());
+			stmt.setString(4,adres.getCountry());
+			stmt.executeUpdate();
+			ResultSet rs = stmt.getGeneratedKeys();  
+			int key = rs.next() ? rs.getInt(1) : 0;
+			con.close(); 
+			return key;
+				
+			
+			
+			 
+			
+		
 			
 	}
 }

@@ -1,5 +1,6 @@
 package Dao;
 
+import java.awt.image.ColorConvertOp;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,5 +85,82 @@ public class DaoUser {
 			
 	
 		}
+	
+public User finduser(String emaila) throws SQLException{
+		
+		
+		List <User> users = new ArrayList<User>();
+		
+		try{  
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection(  
+			"jdbc:mysql://localhost:3306/sss","root","root");  
+
+
+			PreparedStatement stmt=con.prepareStatement("select * from sss.user where email = ? ");  
+			stmt.setString(1,emaila);
+			ResultSet rs=stmt.executeQuery(); 
+			int i =1;
+		
+			while(rs.next())  
+			{
+				int id = rs.getInt(i++);
+				String firstname = rs.getString(i++);
+				String lastname = rs.getString(i++);
+				String email = rs.getString(i++);
+				String phoneNumber = rs.getString(i++);
+				int adressid = rs.getInt(i++);
+				Adress a = daoadress.getOne(adressid);
+				String Cardnumber = rs.getString(i++);
+				Language MainLanguage = Language.valueOf(rs.getString(i++));
+				List<Language> langs = daolang.getAllbyUser(id);
+				User pera  = new User(id,firstname,lastname,email,phoneNumber,a,Cardnumber,langs,MainLanguage);
+				return pera;
+			}
+			
+			con.close();  
+			}catch(Exception e){ System.out.println(e);}
+		return null;  
+			
+	
+		}
+public User SaveCustomer(User user) throws SQLException{
+	
+	
+	List <User> users = new ArrayList<User>();
+	
+	try{  
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con=DriverManager.getConnection(  
+		"jdbc:mysql://localhost:3306/sss","root","root");  
+
+		int adres = daoadress.Save(user.getAdress());
+		PreparedStatement stmt=con.prepareStatement("INSERT INTO sss.user(`firstname`,`lastname`,`email`,`phone`,`adress`,`cardnumber`,`mainlanguage`,`type`)VALUES(?,?,?,?,?,?,?,?);",PreparedStatement.RETURN_GENERATED_KEYS);  
+		stmt.setString(1,user.getFirstname());
+		stmt.setString(2,user.getLastname());
+		stmt.setString(3,user.getEmail());
+		stmt.setString(4,user.getPhoneNumber());
+		stmt.setInt(5,adres);
+		stmt.setString(6,user.getCardNumber());
+		stmt.setString(7,String.valueOf(user.getMainLanguage()));
+		stmt.setString(8,"CUSTOMER");
+	
+		stmt.executeUpdate();
+		ResultSet rs = stmt.getGeneratedKeys();  
+		int key = rs.next() ? rs.getInt(1) : 0;
+
+		
+		
+		user.setId(key);
+		con.close();  
+		daolang.SaveLanguages(user);
+		
+
+		}catch(Exception e){ System.out.println(e);}
+	return null;  
+		
+
+	}
+
 
 }

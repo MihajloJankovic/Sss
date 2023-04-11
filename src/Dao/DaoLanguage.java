@@ -40,6 +40,30 @@ public class DaoLanguage {
 		return langs;
 		
 	}
+	public void SaveLanguages(User us)
+	{
+		for (Language language : us.getSecondaryLanguages()) {
+			
+			
+			try{  
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con=DriverManager.getConnection(  
+				"jdbc:mysql://localhost:3306/sss","root","root");  
+
+				PreparedStatement stmt=con.prepareStatement("INSERT INTO sss.userlanguage(`user`,`language`)VALUES(?,?);");
+				stmt.setInt(1,us.getId());
+				stmt.setString(2,String.valueOf(language));
+				stmt.executeUpdate();  
+				
+				con.close();  
+				}catch(Exception e){ System.out.println(e);}  
+				
+			
+			
+		}
+		
 	
+		
+	}
 
 }
