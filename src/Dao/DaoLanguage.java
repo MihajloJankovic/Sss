@@ -28,7 +28,7 @@ public class DaoLanguage {
 			while(rs.next())  
 			{
 				
-				String language = rs.getString(i++);
+				String language = rs.getString(i);
 				Language la = Language.valueOf(language);
 				langs.add(la);
 			}

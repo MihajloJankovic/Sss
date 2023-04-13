@@ -75,7 +75,8 @@ public class DaoUser {
 				String Cardnumber = rs.getString(i++);
 				Language MainLanguage = Language.valueOf(rs.getString(i++));
 				List<Language> langs = daolang.getAllbyUser(id);
-				User pera  = new User(id,firstname,lastname,email,phoneNumber,a,Cardnumber,langs,MainLanguage);
+				type admin = type.valueOf(rs.getString(i++));
+				User pera  = new User(id,firstname,lastname,email,phoneNumber,a,Cardnumber,langs,MainLanguage,admin);
 				return pera;
 			}
 			
@@ -97,14 +98,13 @@ public User finduser(String emaila) throws SQLException{
 			"jdbc:mysql://localhost:3306/sss","root","root");  
 
 
-			PreparedStatement stmt=con.prepareStatement("select * from sss.user where email = ? ");  
+			PreparedStatement stmt=con.prepareStatement("select * from sss.user where email = ?;");  
 			stmt.setString(1,emaila);
 			ResultSet rs=stmt.executeQuery(); 
 			int i =1;
 		
-			while(rs.next())  
-			{
-				int id = rs.getInt(i++);
+			rs.next();	
+			int id = rs.getInt(i++);
 				String firstname = rs.getString(i++);
 				String lastname = rs.getString(i++);
 				String email = rs.getString(i++);
@@ -115,10 +115,11 @@ public User finduser(String emaila) throws SQLException{
 				Language MainLanguage = Language.valueOf(rs.getString(i++));
 				List<Language> langs = daolang.getAllbyUser(id);
 				User pera  = new User(id,firstname,lastname,email,phoneNumber,a,Cardnumber,langs,MainLanguage);
+				con.close();  
 				return pera;
-			}
 			
-			con.close();  
+			
+		
 			}catch(Exception e){ System.out.println(e);}
 		return null;  
 			
@@ -127,15 +128,33 @@ public User finduser(String emaila) throws SQLException{
 public User SaveCustomer(User user) throws SQLException{
 	
 	
-	List <User> users = new ArrayList<User>();
+
 	
 	try{  
 		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con1=DriverManager.getConnection(  
+		"jdbc:mysql://localhost:3306/sss","root","root");  
+		PreparedStatement stmt1=con1.prepareStatement("select count(email) from sss.user where email = ?");  
+		stmt1.setString(1,user.getEmail());
+		ResultSet rs1=stmt1.executeQuery(); 
+		
+	
+		rs1.next();
+		int k = rs1.getInt(1);
+		if(k!= 0)
+		{
+			return null;
+		}
 		Connection con=DriverManager.getConnection(  
 		"jdbc:mysql://localhost:3306/sss","root","root");  
 
+		
 		int adres = daoadress.Save(user.getAdress());
 		PreparedStatement stmt=con.prepareStatement("INSERT INTO sss.user(`firstname`,`lastname`,`email`,`phone`,`adress`,`cardnumber`,`mainlanguage`,`type`)VALUES(?,?,?,?,?,?,?,?);",PreparedStatement.RETURN_GENERATED_KEYS);  
+		stmt.setString(1,user.getEmail());
+		
+		
+		
 		stmt.setString(1,user.getFirstname());
 		stmt.setString(2,user.getLastname());
 		stmt.setString(3,user.getEmail());

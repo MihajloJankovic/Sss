@@ -11,10 +11,12 @@ import Dao.DaoUser;
 import sss.model.Adress;
 import sss.model.Language;
 import sss.model.User;
+import view.login;
 
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.Console;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class main extends JFrame {
 	DaoUser userdao = new DaoUser();
 
 	private JPanel contentPane;
+	
 
 	/**
 	 * Launch the application.
@@ -56,21 +59,28 @@ public class main extends JFrame {
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
-			
-				List<Language> secondaryLanguages = new ArrayList<Language>();
-				secondaryLanguages.add(Language.ENGLISH);
-				secondaryLanguages.add(Language.GERMAN);
-				Adress a = new Adress("ulica","65", "beska","Srbija");
-				User pera = new User("Petar","Peric","email@gmail.com","06930303",a,"532242425254",secondaryLanguages,Language.SERBIAN);
-			
-				try {
-					userdao.SaveCustomer(pera);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 				
+				
+				
+				    login cppp = new login();
+					cppp.setVisible(true);
+					setVisible(false); //you can't see me!
+					dispose(); //Destroy the JFrame object
+					
+//			
+//				List<Language> secondaryLanguages = new ArrayList<Language>();
+//				secondaryLanguages.add(Language.ENGLISH);
+//				secondaryLanguages.add(Language.GERMAN);
+//				Adress a = new Adress("ulica","65", "beska","Srbija");
+//				User pera = new User("Petar","Peric","email@gmail.com","06930303",a,"532242425254",secondaryLanguages,Language.SERBIAN);
+//			
+//				try {
+//					userdao.SaveCustomer(pera);
+//				} catch (SQLException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//				
 				
 			}
 		});
