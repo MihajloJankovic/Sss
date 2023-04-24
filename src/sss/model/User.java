@@ -13,8 +13,15 @@ public class User {
 	String CardNumber;
 	List<Language> SecondaryLanguages = new ArrayList<Language>();
 	Language MainLanguage;
+	type type;
+	public type getType() {
+		return type;
+	}
+	public void setType(type admin) {
+		type = admin;
+	}
 	public User(int id, String firstname, String lastname, String email, String phoneNumber, Adress adress,
-			String cardNumber, List<Language> secondaryLanguages, Language mainLanguage) {
+			String cardNumber, List<Language> secondaryLanguages, Language mainLanguage,type admin) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -25,6 +32,7 @@ public class User {
 		CardNumber = cardNumber;
 		SecondaryLanguages = secondaryLanguages;
 		MainLanguage = mainLanguage;
+		this.type= admin;
 	}
 	public User(String firstname, String lastname, String email, String phoneNumber, Adress adress,String cardNumber,
 			List<Language> secondaryLanguages, Language mainLanguage) {
