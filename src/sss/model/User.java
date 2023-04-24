@@ -13,12 +13,12 @@ public class User {
 	String CardNumber;
 	List<Language> SecondaryLanguages = new ArrayList<Language>();
 	Language MainLanguage;
-	type Admin;
+	type type;
 	public type getType() {
-		return Admin;
+		return type;
 	}
 	public void setType(type admin) {
-		Admin = admin;
+		type = admin;
 	}
 	public User(int id, String firstname, String lastname, String email, String phoneNumber, Adress adress,
 			String cardNumber, List<Language> secondaryLanguages, Language mainLanguage,type admin) {
@@ -32,7 +32,7 @@ public class User {
 		CardNumber = cardNumber;
 		SecondaryLanguages = secondaryLanguages;
 		MainLanguage = mainLanguage;
-		this.Admin= admin;
+		this.type= admin;
 	}
 	public User(String firstname, String lastname, String email, String phoneNumber, Adress adress,String cardNumber,
 			List<Language> secondaryLanguages, Language mainLanguage) {

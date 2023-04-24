@@ -8,6 +8,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
+import com.toedter.calendar.JCalendar;
+
 import Dao.DaoUser;
 import sss.model.*;
 
@@ -19,6 +25,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import javax.swing.JSpinner;
 
 public class login extends JFrame {
 	DaoUser userdao = new DaoUser();
@@ -63,6 +70,8 @@ public class login extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
+	
+
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -78,20 +87,20 @@ public class login extends JFrame {
 							setVisible(false); //you can't see me!
 							dispose();
 						}
-						if(pera.getAdmin() == type.CUSTOMER)
-						{
-							UserView cpp = new UserView(pera);
-							cpp.setVisible(true);
-							setVisible(false); //you can't see me!
-							dispose();
-						}
-						if(pera.getAdmin() == type.COACH)
-						{
-							CoachView cpp = new CoachView(pera);
-							cpp.setVisible(true);
-							setVisible(false); //you can't see me!
-							dispose();
-						}
+//						if(pera.getAdmin() == type.CUSTOMER)
+//						{
+//							UserView cpp = new UserView(pera);
+//							cpp.setVisible(true);
+//							setVisible(false); //you can't see me!
+//							dispose();
+//						}
+//						if(pera.getAdmin() == type.COACH)
+//						{
+//							CoachView cpp = new CoachView(pera);
+//							cpp.setVisible(true);
+//							setVisible(false); //you can't see me!
+//							dispose();
+//						}
 					  
 					}
 					else {

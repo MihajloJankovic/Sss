@@ -12,6 +12,7 @@ import sss.model.Adress;
 import sss.model.Language;
 import sss.model.User;
 import view.login;
+import view.register;
 
 import javax.swing.JButton;
 import java.awt.Font;
@@ -92,14 +93,18 @@ public class main extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				DaoUser dao = new DaoUser();
+				   register cppp;
 				try {
-					dao.getAll();
+					cppp = new register();
+					cppp.setVisible(true);
+					setVisible(false); //you can't see me!
+					dispose(); //Destroy the JFrame object
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+					
+			
 			
 			}
 		});

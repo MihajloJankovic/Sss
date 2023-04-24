@@ -13,7 +13,7 @@ public class DaoUser {
 	private DaoAdress daoadress = new DaoAdress();
 	
 	
-	public List<User> getAll() throws SQLException{
+	public List<User> getAllCustomers() throws SQLException{
 		
 		
 		List <User> users = new ArrayList<User>();
@@ -24,7 +24,7 @@ public class DaoUser {
 			"jdbc:mysql://localhost:3306/sss","root","root");  
 
 			Statement stmt=con.createStatement();  
-			ResultSet rs=stmt.executeQuery("select * from user;");  
+			ResultSet rs=stmt.executeQuery("select * from user where type = 'CUSTOMER';");  
 			int i =1;
 		
 			while(rs.next())  
@@ -39,7 +39,8 @@ public class DaoUser {
 				String Cardnumber = rs.getString(i++);
 				Language MainLanguage = Language.valueOf(rs.getString(i++));
 				List<Language> langs = daolang.getAllbyUser(id);
-				users.add(new User(id,firstname,lastname,email,phoneNumber,a,Cardnumber,langs,MainLanguage));
+				type Type =type.valueOf(rs.getString(i++));
+				users.add(new User(id,firstname,lastname,email,phoneNumber,a,Cardnumber,langs,MainLanguage,Type));
 			}
 			
 			con.close();  
@@ -114,7 +115,8 @@ public User finduser(String emaila) throws SQLException{
 				String Cardnumber = rs.getString(i++);
 				Language MainLanguage = Language.valueOf(rs.getString(i++));
 				List<Language> langs = daolang.getAllbyUser(id);
-				User pera  = new User(id,firstname,lastname,email,phoneNumber,a,Cardnumber,langs,MainLanguage);
+				type Type =type.valueOf(rs.getString(i++));
+				User pera  = new User(id,firstname,lastname,email,phoneNumber,a,Cardnumber,langs,MainLanguage,Type);
 				con.close();  
 				return pera;
 			
