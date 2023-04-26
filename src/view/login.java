@@ -80,20 +80,20 @@ public class login extends JFrame {
 					User pera = userdao.finduser(textField.getText());
 					if(pera != null)
 					{
-						if(pera.getType() == type.ADMIN)
+						if(pera.getType() == type.OWNER)
 						{
 							AdminView cpp = new AdminView(pera);
 							cpp.setVisible(true);
 							setVisible(false); //you can't see me!
 							dispose();
 						}
-//						if(pera.getAdmin() == type.CUSTOMER)
-//						{
-//							UserView cpp = new UserView(pera);
-//							cpp.setVisible(true);
-//							setVisible(false); //you can't see me!
-//							dispose();
-//						}
+						if(pera.getType() == type.ADMIN)
+						{
+							RealAdminView cpp = new RealAdminView(pera);
+							cpp.setVisible(true);
+							setVisible(false); //you can't see me!
+							dispose();
+						}
 //						if(pera.getAdmin() == type.COACH)
 //						{
 //							CoachView cpp = new CoachView(pera);
@@ -108,6 +108,9 @@ public class login extends JFrame {
 						JOptionPane.showMessageDialog(null, "Not Existing Email");
 					}
 				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}

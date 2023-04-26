@@ -53,11 +53,6 @@ public class AdminView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JButton btnNewButton = new JButton("Coaches");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton.setBounds(29, 35, 160, 56);
-		contentPane.add(btnNewButton);
 		JCalendar dob=new JCalendar();
 		
 		dob.setLocation(655, 35);

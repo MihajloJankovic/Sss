@@ -2,5 +2,5 @@ package sss.model;
 
 public enum type {
 
-	 ADMIN,CUSTOMER,COACH
+	 ADMIN,CUSTOMER,COACH,OWNER
 }

@@ -35,7 +35,7 @@ public class User {
 		this.type= admin;
 	}
 	public User(String firstname, String lastname, String email, String phoneNumber, Adress adress,String cardNumber,
-			List<Language> secondaryLanguages, Language mainLanguage) {
+			List<Language> secondaryLanguages, Language mainLanguage,type admin) {
 		super();
 		this.CardNumber = cardNumber;
 		this.firstname = firstname;
@@ -45,6 +45,7 @@ public class User {
 		Adress = adress;
 		SecondaryLanguages = secondaryLanguages;
 		MainLanguage = mainLanguage;
+		this.type= admin;
 	}
 	public int getId() {
 		return id;

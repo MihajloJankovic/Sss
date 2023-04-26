@@ -186,9 +186,9 @@ public class register extends JFrame {
 				Adress adresa = new Adress(textField_4.getText(),textField_6.getText(),textField_7.getText(),textField_8.getText());				
 			
 				
-				User pera = new User(textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText(),adresa,textField_5.getText(),langs,Language.valueOf(list.getSelectedValue().toString()));
+				User pera = new User(textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText(),adresa,textField_5.getText(),langs,Language.valueOf(list.getSelectedValue().toString()),sss.model.type.CUSTOMER);
 					try {
-						user.SaveCustomer(pera);
+						user.Save(pera);
 						String st = "Secsesfull";
 						JOptionPane.showMessageDialog(null, st);
 					} catch (SQLException e1) {

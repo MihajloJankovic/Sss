@@ -127,7 +127,7 @@ public User finduser(String emaila) throws SQLException{
 			
 	
 		}
-public User SaveCustomer(User user) throws SQLException{
+public User Save(User user) throws SQLException{
 	
 	
 
@@ -164,7 +164,7 @@ public User SaveCustomer(User user) throws SQLException{
 		stmt.setInt(5,adres);
 		stmt.setString(6,user.getCardNumber());
 		stmt.setString(7,String.valueOf(user.getMainLanguage()));
-		stmt.setString(8,"CUSTOMER");
+		stmt.setString(8,user.getType().toString());
 	
 		stmt.executeUpdate();
 		ResultSet rs = stmt.getGeneratedKeys();  
@@ -175,6 +175,7 @@ public User SaveCustomer(User user) throws SQLException{
 		user.setId(key);
 		con.close();  
 		daolang.SaveLanguages(user);
+		return user;
 		
 
 		}catch(Exception e){ System.out.println(e);}
@@ -183,5 +184,27 @@ public User SaveCustomer(User user) throws SQLException{
 
 	}
 
+public void Delete(int id) throws SQLException{
+	
+	
 
+	
+	try{  
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con1=DriverManager.getConnection(  
+		"jdbc:mysql://localhost:3306/sss","root","root");  
+		PreparedStatement stmt1=con1.prepareStatement("delete from sss.user where id = ?");  
+		stmt1.setInt(1,id);
+		stmt1.executeUpdate();
+		
+	
+		con1.close();  
+		
+		
+
+		}catch(Exception e){ System.out.println(e);}
+
+		
+
+	}
 }

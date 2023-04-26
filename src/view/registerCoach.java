@@ -1,33 +1,36 @@
 package view;
-
-import java.awt.EventQueue;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Dao.DaoCoach;
 import Dao.DaoLanguage;
 import Dao.DaoUser;
 import sss.model.Adress;
 import sss.model.Language;
+import sss.model.Rank;
 import sss.model.User;
 
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
+import javax.swing.AbstractListModel;
+
 
 
 public class registerCoach extends JFrame {
-
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -40,14 +43,14 @@ public class registerCoach extends JFrame {
 	JList list;
 	List<Language> langs = new  ArrayList<Language>();
 	DefaultListModel listModel;
-	DaoUser user;
+	DaoUser user = new DaoUser();
+	DaoCoach coach = new DaoCoach();
 
 	private JButton btnNewButton;
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
-	private JLabel lblNewLabel_2;
 	
 
 	/**
@@ -71,7 +74,7 @@ public class registerCoach extends JFrame {
 	 */
 	public registerCoach() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 746, 766);
+		setBounds(100, 100, 586, 927);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -139,13 +142,24 @@ public class registerCoach extends JFrame {
 		}
 		
 		list = new JList(listModel);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setBounds(44, 578, 155, 90);
 	
 
 		contentPane.add(list);
 	
 		
-		list_1 = new JList(listModel);
+		list_1 = new JList();
+		list_1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		list_1.setModel(new AbstractListModel() {
+			String[] values = new String[] {"SERBIAN", "ENGLISH", "GERMAN", "RUSSIAN", "FRENCH"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
 		list_1.setBounds(315, 578, 166, 76);
 		contentPane.add(list_1);
 	
@@ -157,35 +171,44 @@ public class registerCoach extends JFrame {
 		lblNewLabel_1_1.setBounds(340, 548, 96, 13);
 		contentPane.add(lblNewLabel_1_1);
 		
-		
-		
-		btnNewButton = new JButton("Add to List");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				langs.add(Language.valueOf(list_1.getSelectedValue().toString()));
-			}
-		});
-		btnNewButton.setBounds(352, 675, 85, 21);
-		contentPane.add(btnNewButton);
+		textField_9 = new JTextField();
+		textField_9.setColumns(10);
+		textField_9.setBounds(181, 704, 155, 44);
+		contentPane.add(textField_9);
 		
 		JButton btnNewButton_1 = new JButton("Register");
 		btnNewButton_1.addActionListener(new ActionListener() {
+			
+
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				
-			
+			for (var language : list_1.getSelectedValues() ) {
+				
+				langs.add(Language.valueOf(language.toString()));
+			}
 				Adress adresa = new Adress(textField_4.getText(),textField_6.getText(),textField_7.getText(),textField_8.getText());				
-				User pera = new User(textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText(),
-						adresa,textField_5.getText(),langs,Language.valueOf(list.getSelectedValue().toString()));
-				try {
-					user.SaveCustomer(pera);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 			
+				
+				User peraa = new User(textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText(),adresa,textField_5.getText(),langs,Language.valueOf(list.getSelectedValue().toString()),sss.model.type.COACH);
+					try {
+						User pera = user.Save(peraa);
+						try {
+							coach.Save(pera.getId(),Rank.JUNIOR,textField_9.getText());
+						} catch (ClassNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						String st = "Secsesfull";
+						JOptionPane.showMessageDialog(null, st);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				
 			}
 		});
-		btnNewButton_1.setBounds(208, 698, 85, 21);
+		btnNewButton_1.setBounds(209, 773, 85, 21);
 		contentPane.add(btnNewButton_1);
 		
 		textField_6 = new JTextField();
@@ -215,17 +238,13 @@ public class registerCoach extends JFrame {
 		lblCountry.setBounds(83, 469, 45, 13);
 		contentPane.add(lblCountry);
 		
-		textField_9 = new JTextField();
-		textField_9.setBounds(485, 25, 224, 44);
-		contentPane.add(textField_9);
-		textField_9.setColumns(10);
 		
-		lblNewLabel_2 = new JLabel("Degree or Sertificate");
-		lblNewLabel_2.setBounds(346, 32, 135, 29);
-		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblDegree = new JLabel("Degree");
+		lblDegree.setBounds(65, 719, 87, 13);
+		contentPane.add(lblDegree);
 		
 		
 	
 	}
-
 }

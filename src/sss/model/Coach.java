@@ -5,6 +5,12 @@ import java.awt.Image;
 public class Coach {
 	int id;
 	
+	public String getDegree() {
+		return degree;
+	}
+	public void setDegree(String degree) {
+		this.degree = degree;
+	}
 	Rank rank;
 	String degree;
 	double Rating;

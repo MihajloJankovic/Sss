@@ -4,6 +4,15 @@ import java.time.LocalDateTime;
 
 public class Appointment {
 	LocalDateTime StartDateTime;
+	Coach coach;
+	Client client;
+	boolean reserved ;
+	boolean canceled;
+	int price;
+	
+	
+	
+	
 	public LocalDateTime getStartDateTime() {
 		return StartDateTime;
 	}
@@ -68,11 +77,6 @@ public class Appointment {
 	public void setId(int id) {
 		this.id = id;
 	}
-	Coach coach;
-	Client client;
-	boolean reserved ;
-	boolean canceled;
-	int price;
-	
+
 
 }
