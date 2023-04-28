@@ -47,6 +47,9 @@ public class User {
 		MainLanguage = mainLanguage;
 		this.type= admin;
 	}
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 	public int getId() {
 		return id;
 	}

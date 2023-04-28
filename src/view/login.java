@@ -14,6 +14,7 @@ import org.jdatepicker.impl.UtilDateModel;
 
 import com.toedter.calendar.JCalendar;
 
+import Dao.DaoCoach;
 import Dao.DaoUser;
 import sss.model.*;
 
@@ -29,6 +30,7 @@ import javax.swing.JSpinner;
 
 public class login extends JFrame {
 	DaoUser userdao = new DaoUser();
+	DaoCoach c = new DaoCoach();
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -94,13 +96,21 @@ public class login extends JFrame {
 							setVisible(false); //you can't see me!
 							dispose();
 						}
-//						if(pera.getAdmin() == type.COACH)
-//						{
-//							CoachView cpp = new CoachView(pera);
-//							cpp.setVisible(true);
-//							setVisible(false); //you can't see me!
-//							dispose();
-//						}
+						if(pera.getType() == type.CUSTOMER)
+						{
+							UserVIew cpp = new UserVIew(pera);
+							cpp.setVisible(true);
+							setVisible(false); //you can't see me!
+							dispose();
+						}
+						if(pera.getType() == type.COACH)
+						{
+							Coach pera1 = c.getOne(pera.getId());
+							CoachView cpp = new CoachView(pera1);
+							cpp.setVisible(true);
+							setVisible(false); //you can't see me!
+							dispose();
+						}
 					  
 					}
 					else {

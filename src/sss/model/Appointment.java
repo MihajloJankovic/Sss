@@ -3,6 +3,7 @@ package sss.model;
 import java.time.LocalDateTime;
 
 public class Appointment {
+	int id;
 	LocalDateTime StartDateTime;
 	Coach coach;
 	Client client;
@@ -49,18 +50,17 @@ public class Appointment {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	int id;
-	public Appointment(LocalDateTime startDateTime, Coach coach, Client client, boolean reserved, boolean canceled,
+	
+	public Appointment(LocalDateTime startDateTime, Coach coach,boolean reserved, boolean canceled,
 			int price) {
 		super();
 		StartDateTime = startDateTime;
 		this.coach = coach;
-		this.client = client;
 		this.reserved = reserved;
 		this.canceled = canceled;
 		this.price = price;
 	}
-	public Appointment(LocalDateTime startDateTime, int id, Coach coach, Client client, boolean reserved,
+	public Appointment( int id,LocalDateTime startDateTime, Coach coach, Client client, boolean reserved,
 			boolean canceled, int price) {
 		super();
 		StartDateTime = startDateTime;
@@ -72,7 +72,7 @@ public class Appointment {
 		this.price = price;
 	}
 	public int getId() {
-		return id;
+		return id ;
 	}
 	public void setId(int id) {
 		this.id = id;
