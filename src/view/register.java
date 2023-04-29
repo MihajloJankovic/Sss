@@ -61,6 +61,7 @@ public class register extends JFrame {
 				try {
 					register frame = new register();
 					frame.setVisible(true);
+					 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -72,7 +73,7 @@ public class register extends JFrame {
 	 * Create the frame.
 	 */
 	public register() throws SQLException {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
 		setBounds(100, 100, 541, 766);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

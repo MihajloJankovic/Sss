@@ -44,6 +44,7 @@ public class NewReport extends JFrame {
 				try {
 					NewReport frame = new NewReport(user);
 					frame.setVisible(true);
+					 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -56,7 +57,7 @@ public class NewReport extends JFrame {
 	 */
 	public NewReport(User pera) {
 		this.user = pera;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
 		setBounds(100, 100, 445, 527);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

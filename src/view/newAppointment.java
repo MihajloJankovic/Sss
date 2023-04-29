@@ -43,6 +43,7 @@ public class newAppointment extends JFrame {
 				try {
 					newAppointment frame = new newAppointment(coach);
 					frame.setVisible(true);
+					 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,7 +61,7 @@ public class newAppointment extends JFrame {
 	 */
 	public newAppointment(Coach pera ) {
 		this.coach = pera;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		setBounds(100, 100, 450, 542);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

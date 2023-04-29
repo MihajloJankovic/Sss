@@ -45,7 +45,7 @@ public class CoachView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("New Appointment'");
+		JButton btnNewButton = new JButton("New Appointment");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -56,6 +56,15 @@ public class CoachView extends JFrame {
 		});
 		btnNewButton.setBounds(22, 27, 134, 21);
 		contentPane.add(btnNewButton);
+		
+		JButton btnMyAppointments = new JButton("My Appointments");
+		btnMyAppointments.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CoachAppointments cpp = new CoachAppointments(coach);
+				cpp.setVisible(true);
+			}
+		});
+		btnMyAppointments.setBounds(235, 27, 134, 21);
+		contentPane.add(btnMyAppointments);
 	}
-
 }
