@@ -98,6 +98,15 @@ public class login extends JFrame {
 						}
 						if(pera.getType() == type.CUSTOMER)
 						{
+							/*ovde proveriti da li je broj odradjenih treninga od prethodnog reporta >2. Cim provalim kako. 
+							Ako jeste->
+							
+							NewReport cpp = new NewReport(pera);
+							cpp.setVisible(true);
+							setVisible(false);
+							dispose();
+							ELSE->izvrsavanje koda ispod*/
+							
 							UserVIew cpp = new UserVIew(pera);
 							cpp.setVisible(true);
 							setVisible(false); //you can't see me!

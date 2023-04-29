@@ -1,5 +1,5 @@
 package view;
-//za musteriju
+//za trenera
 //valjalo bi obom prozoru proslediti i ID oba korisnika iz prethodnog prozora
 //importi prekopirani iz prethodno postojecih komponenti, verovatno imaju viska
 import java.awt.EventQueue;
@@ -35,15 +35,19 @@ import javax.swing.JTable;
 import java.awt.Color;
 import java.awt.Font;
 
-public class OngoingAppointment extends JFrame{
+public class OngoingAppointmentCoach extends JFrame {
 	private JTable Camera2;
 	private JTable Camera1;
-	
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OngoingAppointment frame = new OngoingAppointment();
+					OngoingAppointmentCoach frame = new OngoingAppointmentCoach();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,8 +55,11 @@ public class OngoingAppointment extends JFrame{
 			}
 		});
 	}
-	
-	public OngoingAppointment() {
+
+	/**
+	 * Create the frame.
+	 */
+	public OngoingAppointmentCoach() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 785, 420);
 		getContentPane().setLayout(null);
@@ -62,7 +69,7 @@ public class OngoingAppointment extends JFrame{
 		LabelCamera1.setBounds(131, 37, 156, 13);
 		getContentPane().add(LabelCamera1);
 		
-		JLabel LabelCamera2 = new JLabel("Coach's camera");//ovde bi moglo i da stoji ime trenera
+		JLabel LabelCamera2 = new JLabel("Partner's camera");//ovde bi moglo i da stoji ime musterije
 		LabelCamera2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		LabelCamera2.setBounds(491, 33, 156, 21);
 		getContentPane().add(LabelCamera2);
@@ -80,8 +87,8 @@ public class OngoingAppointment extends JFrame{
 		JButton ButtonEnd = new JButton("End ongoing session");
 		ButtonEnd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RateSession cpp=new RateSession();//ako UserAppointments ne ostaje aktivan u pozadini tokom treninga
-				cpp.setVisible(true);			  //treba proslediti i ID
+				RateSessionCoach cpp=new RateSessionCoach();//ako CoachAppointments ne ostaje aktivan u pozadini tokom treninga
+				cpp.setVisible(true);						//treba proslediti i ID
 				setVisible(false);
 				//dispose();nznm da li je neophodno
 			}
@@ -90,4 +97,5 @@ public class OngoingAppointment extends JFrame{
 		ButtonEnd.setBounds(277, 296, 218, 50);
 		getContentPane().add(ButtonEnd);
 	}
+
 }

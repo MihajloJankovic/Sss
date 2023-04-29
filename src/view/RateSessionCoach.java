@@ -1,5 +1,5 @@
 package view;
-//za musteriju
+//za trenera
 //ovo pise da treba u specifikaciji projekta. Da li ce se podaci sa ove stranice cuvati negde, ne znam
 //importi prekopirani iz prethodno postojecih komponenti, verovatno imaju viska
 import java.awt.EventQueue;
@@ -7,6 +7,7 @@ import java.util.Calendar;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 
 import sss.model.Appointment;
@@ -20,6 +21,7 @@ import com.toedter.calendar.JCalendar;
 import Dao.DaoAppointment;
 
 import javax.swing.JLabel;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -28,13 +30,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
+import java.awt.BorderLayout;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.JTable;
+import java.awt.Color;
+import java.awt.Font;
 
-public class RateSession extends JFrame {
+public class RateSessionCoach extends JFrame {
 
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -47,7 +51,7 @@ public class RateSession extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RateSession frame = new RateSession();
+					RateSessionCoach frame = new RateSessionCoach();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,7 +63,7 @@ public class RateSession extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RateSession() {
+	public RateSessionCoach() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 455, 317);
 		contentPane = new JPanel();
@@ -102,7 +106,7 @@ public class RateSession extends JFrame {
 		JButton SubmitBtn = new JButton("Submit rating");
 		SubmitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);	//idealno, UserAppointments bi ostao aktivan u pozadini tokom treninga, inace bi ovde trebalo
+				setVisible(false);	//idealno, CoachAppointments bi ostao aktivan u pozadini tokom treninga, inace bi ovde trebalo
 									//proslediti ID da bi se preslo nazad na taj prozor
 				//dispose();nznm da li je neophodno
 			}
@@ -117,4 +121,5 @@ public class RateSession extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 	}
+
 }
