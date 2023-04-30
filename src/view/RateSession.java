@@ -18,6 +18,7 @@ import javax.swing.SpinnerDateModel;
 import com.toedter.calendar.JCalendar;
 
 import Dao.DaoAppointment;
+import Dao.DaoCoach;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -38,7 +39,6 @@ public class RateSession extends JFrame {
 
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -59,9 +59,10 @@ public class RateSession extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RateSession() {
+	public RateSession(int idCoach) { 
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 455, 317);
+		setBounds(100, 100, 402, 317);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -71,7 +72,7 @@ public class RateSession extends JFrame {
 		JLabel lblNewLabel = new JLabel("Rate your experience during the last session");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(58, 28, 341, 43);
+		lblNewLabel.setBounds(10, 28, 341, 43);
 		contentPane.add(lblNewLabel);
 		
 		JRadioButton RatingBtn1 = new JRadioButton("1");
@@ -102,19 +103,25 @@ public class RateSession extends JFrame {
 		JButton SubmitBtn = new JButton("Submit rating");
 		SubmitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);	//idealno, UserAppointments bi ostao aktivan u pozadini tokom treninga, inace bi ovde trebalo
-									//proslediti ID da bi se preslo nazad na taj prozor
+				
+				if(RatingBtn1.isSelected()) {		//verovatno postoji elegantniji nacin da se ovo odradi
+					int ocena=1;
+				} else if(RatingBtn2.isSelected()) {
+					int ocena=2;
+				} else if(RatingBtn3.isSelected()) {
+					int ocena=3;
+				} else if(RatingBtn4.isSelected()) {
+					int ocena=4;
+				} else {
+					int ocena=5;
+				}
+				//poziv metode SaveRating(idCoach, ocena)
+				setVisible(false);	
 				//dispose();nznm da li je neophodno
 			}
 		});
 		SubmitBtn.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		SubmitBtn.setBounds(58, 213, 150, 43);
+		SubmitBtn.setBounds(117, 214, 150, 43);
 		contentPane.add(SubmitBtn);
-		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textField.setBounds(188, 81, 191, 108);
-		contentPane.add(textField);
-		textField.setColumns(10);
 	}
 }

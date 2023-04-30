@@ -52,7 +52,7 @@ public class OngoingAppointment extends JFrame{
 		});
 	}
 	
-	public OngoingAppointment() {
+	public OngoingAppointment(int idClient, int idCoach) {	//idClient trenutno nije neophodan
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 785, 420);
 		getContentPane().setLayout(null);
@@ -80,8 +80,8 @@ public class OngoingAppointment extends JFrame{
 		JButton ButtonEnd = new JButton("End ongoing session");
 		ButtonEnd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RateSession cpp=new RateSession();//ako UserAppointments ne ostaje aktivan u pozadini tokom treninga
-				cpp.setVisible(true);			  //treba proslediti i ID
+				RateSession cpp=new RateSession(idCoach);
+				cpp.setVisible(true);			  
 				setVisible(false);
 				//dispose();nznm da li je neophodno
 			}

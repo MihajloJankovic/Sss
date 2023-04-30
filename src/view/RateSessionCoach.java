@@ -42,7 +42,6 @@ public class RateSessionCoach extends JFrame {
 
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -65,7 +64,7 @@ public class RateSessionCoach extends JFrame {
 	 */
 	public RateSessionCoach() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 455, 317);
+		setBounds(100, 100, 378, 317);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -75,7 +74,7 @@ public class RateSessionCoach extends JFrame {
 		JLabel lblNewLabel = new JLabel("Rate your experience during the last session");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(58, 28, 341, 43);
+		lblNewLabel.setBounds(10, 28, 341, 43);
 		contentPane.add(lblNewLabel);
 		
 		JRadioButton RatingBtn1 = new JRadioButton("1");
@@ -112,14 +111,8 @@ public class RateSessionCoach extends JFrame {
 			}
 		});
 		SubmitBtn.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		SubmitBtn.setBounds(58, 213, 150, 43);
+		SubmitBtn.setBounds(96, 214, 150, 43);
 		contentPane.add(SubmitBtn);
-		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textField.setBounds(188, 81, 191, 108);
-		contentPane.add(textField);
-		textField.setColumns(10);
 	}
 
 }
