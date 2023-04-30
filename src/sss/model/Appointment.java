@@ -71,6 +71,9 @@ public class Appointment {
 		this.canceled = canceled;
 		this.price = price;
 	}
+	public Appointment() {
+		// TODO Auto-generated constructor stub
+	}
 	public int getId() {
 		return id ;
 	}

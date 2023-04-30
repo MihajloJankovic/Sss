@@ -26,6 +26,7 @@ public class DaoAppointment {
 	private DaoReport p1= new DaoReport();
 	public Appointment getOne(int idd)
 	{
+		Appointment ab = new Appointment();
 		try{  
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con=DriverManager.getConnection(  
@@ -35,13 +36,13 @@ public class DaoAppointment {
 			stmt.setInt(1,idd);
 			ResultSet rs=stmt.executeQuery(); 
 			
-			
+		
 		
 			int i =1;
 			while(rs.next())  
 			{
 				int id = rs.getInt(i++);
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 				LocalDateTime date = LocalDateTime.parse(rs.getString(i++),formatter);
 				Coach pera = pera1.getOne(rs.getInt(i++));
 				int h = rs.getInt(i++);
@@ -62,16 +63,18 @@ public class DaoAppointment {
 				Boolean c = Boolean.valueOf(rs.getString(i++));
 				int price = rs.getInt(i++);
 				
-				Appointment ab = new Appointment(id, date, pera, p, c, r,price);
+				Appointment ag = new Appointment(id, date, pera, p, c, r,price);
+				ab=ag;
 				
 			   return ab;
 				
 			}
 			
 			con.close();  
-			}catch(Exception e){ System.out.println(e);}
+			}catch(Exception e){ System.out.println(e); return ab;}
 		
-		return null;  
+		return null;
+		
 			
 	}
 	public List<Appointment> getAll(int idd)
@@ -135,7 +138,7 @@ public class DaoAppointment {
 			Connection con=DriverManager.getConnection(  
 			"jdbc:mysql://localhost:3306/sss","root","root");  
 
-			PreparedStatement stmt=con.prepareStatement("select * from sss.appointment where client = ?");  
+			PreparedStatement stmt=con.prepareStatement("select * from sss.appointment where client = ? and canceled = 0 ");  
 			stmt.setInt(1,idd);
 			ResultSet rs=stmt.executeQuery(); 
 			
@@ -188,7 +191,7 @@ public class DaoAppointment {
 			Connection con=DriverManager.getConnection(  
 			"jdbc:mysql://localhost:3306/sss","root","root");  
 
-			PreparedStatement stmt=con.prepareStatement("select * from sss.appointment where reserved = 0");  
+			PreparedStatement stmt=con.prepareStatement("select * from sss.appointment where reserved = 0 and canceled = 0 and StartDateTime >= NOW();");  
 			ResultSet rs=stmt.executeQuery(); 
 			
 
@@ -269,6 +272,51 @@ public class DaoAppointment {
 			PreparedStatement stmt=con.prepareStatement("update sss.appointment set reserved = 1,client = ? where id = ?", Statement.RETURN_GENERATED_KEYS);  
 			stmt.setInt(1,id);
 			stmt.setString(2,a);
+			stmt.executeUpdate();
+			ResultSet rs = stmt.getGeneratedKeys();  
+			int key = rs.next() ? rs.getInt(1) : 0;
+			con.close(); 
+			return key;
+				
+			
+			
+			 
+			
+		
+			
+	}
+	public int Cancle(String a) throws ClassNotFoundException, SQLException
+	{
+		 
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection(  
+			"jdbc:mysql://localhost:3306/sss","root","root");  
+
+			PreparedStatement stmt=con.prepareStatement("update sss.appointment set reserved = 0,client = ?,canceled =0 where id = ?", Statement.RETURN_GENERATED_KEYS);  
+			stmt.setNull(1, Types.NULL);
+			stmt.setString(2,a);
+			stmt.executeUpdate();
+			ResultSet rs = stmt.getGeneratedKeys();  
+			int key = rs.next() ? rs.getInt(1) : 0;
+			con.close(); 
+			return key;
+				
+			
+			
+			 
+			
+		
+			
+	}
+	public int CanclePay(String a) throws ClassNotFoundException, SQLException
+	{
+		 
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection(  
+			"jdbc:mysql://localhost:3306/sss","root","root");  
+
+			PreparedStatement stmt=con.prepareStatement("update sss.appointment set reserved = 0,canceled =1 where id = ?", Statement.RETURN_GENERATED_KEYS);  
+			stmt.setString(1,a);
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();  
 			int key = rs.next() ? rs.getInt(1) : 0;
