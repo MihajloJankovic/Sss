@@ -1,14 +1,17 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
+import java.awt.SystemColor;
 
-public class main {
+public class main extends JFrame {
 
-	private JFrame frame;
+	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
@@ -17,8 +20,8 @@ public class main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					main window = new main();
-					window.frame.setVisible(true);
+					main frame = new main();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -27,25 +30,19 @@ public class main {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the frame.
 	 */
 	public main() {
-		initialize();
-	}
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 808, 366);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setLayout(null);
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Login");
-		btnNewButton.setBounds(156, 55, 117, 25);
-		frame.getContentPane().add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Register");
-		btnNewButton_1.setBounds(156, 130, 117, 25);
-		frame.getContentPane().add(btnNewButton_1);
+		JButton btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.setBounds(176, 157, 100, 27);
+		contentPane.add(btnNewButton_1);
 	}
 }
