@@ -38,12 +38,12 @@ import java.awt.Font;
 public class OngoingAppointment extends JFrame{
 	private JTable Camera2;
 	private JTable Camera1;
-	
+	private static Coach coach;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OngoingAppointment frame = new OngoingAppointment();
+					OngoingAppointment frame = new OngoingAppointment(coach.getId());//nisam siguran da li je ovo tacno
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +52,7 @@ public class OngoingAppointment extends JFrame{
 		});
 	}
 	
-	public OngoingAppointment(int idClient, int idCoach) {	//idClient trenutno nije neophodan
+	public OngoingAppointment(int idCoach) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 785, 420);
 		getContentPane().setLayout(null);
@@ -62,7 +62,7 @@ public class OngoingAppointment extends JFrame{
 		LabelCamera1.setBounds(131, 37, 156, 13);
 		getContentPane().add(LabelCamera1);
 		
-		JLabel LabelCamera2 = new JLabel("Coach's camera");//ovde bi moglo i da stoji ime trenera
+		JLabel LabelCamera2 = new JLabel("Coach's camera");
 		LabelCamera2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		LabelCamera2.setBounds(491, 33, 156, 21);
 		getContentPane().add(LabelCamera2);

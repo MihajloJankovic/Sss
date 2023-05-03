@@ -105,8 +105,8 @@ public class RateSessionCoach extends JFrame {
 		JButton SubmitBtn = new JButton("Submit rating");
 		SubmitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);	//idealno, CoachAppointments bi ostao aktivan u pozadini tokom treninga, inace bi ovde trebalo
-									//proslediti ID da bi se preslo nazad na taj prozor
+				setVisible(false);	
+									
 				//dispose();nznm da li je neophodno
 			}
 		});

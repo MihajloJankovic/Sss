@@ -87,8 +87,8 @@ public class OngoingAppointmentCoach extends JFrame {
 		JButton ButtonEnd = new JButton("End ongoing session");
 		ButtonEnd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RateSessionCoach cpp=new RateSessionCoach();//ako CoachAppointments ne ostaje aktivan u pozadini tokom treninga
-				cpp.setVisible(true);						//treba proslediti i ID
+				RateSessionCoach cpp=new RateSessionCoach();
+				cpp.setVisible(true);						
 				setVisible(false);
 				//dispose();nznm da li je neophodno
 			}

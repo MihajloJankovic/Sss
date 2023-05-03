@@ -19,6 +19,7 @@ import com.toedter.calendar.JCalendar;
 
 import Dao.DaoAppointment;
 import Dao.DaoCoach;
+import Dao.DaoUser;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -39,7 +40,7 @@ public class RateSession extends JFrame {
 
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-
+	private static Coach coach;
 	/**
 	 * Launch the application.
 	 */
@@ -47,7 +48,7 @@ public class RateSession extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RateSession frame = new RateSession();
+					RateSession frame = new RateSession(coach.getId());//nisam siguran da li je ovo tacno
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -101,23 +102,28 @@ public class RateSession extends JFrame {
 		contentPane.add(rdbtnNewRadRatingBtn5ioButton_4);
 		
 		JButton SubmitBtn = new JButton("Submit rating");
+		
+		
+		
 		SubmitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				int ocena;
 				if(RatingBtn1.isSelected()) {		//verovatno postoji elegantniji nacin da se ovo odradi
-					int ocena=1;
+					ocena=1;
 				} else if(RatingBtn2.isSelected()) {
-					int ocena=2;
+					ocena=2;
 				} else if(RatingBtn3.isSelected()) {
-					int ocena=3;
+					ocena=3;
 				} else if(RatingBtn4.isSelected()) {
-					int ocena=4;
+					ocena=4;
 				} else {
-					int ocena=5;
+					ocena=5;
 				}
-				//poziv metode SaveRating(idCoach, ocena)
+				
+				//SaveRating(idCoach, ocena); verovatno propustam nesto jako ocigledno, ali nikako ne uspevam da ovo formulisem
+												//bez toga da izbaci error
 				setVisible(false);	
-				//dispose();nznm da li je neophodno
+				//dispose(); nznm da li je neophodno
 			}
 		});
 		SubmitBtn.setFont(new Font("Tahoma", Font.PLAIN, 16));
