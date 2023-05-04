@@ -68,6 +68,12 @@ public class CoachView extends JFrame {
 		contentPane.add(btnMyAppointments);
 		
 		JButton btnUserReports = new JButton("User Reports");
+		btnUserReports.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AllReports cpp=new AllReports();
+				cpp.setVisible(true);
+			}
+		});
 		btnUserReports.setBounds(22, 96, 134, 21);
 		contentPane.add(btnUserReports);
 	}
