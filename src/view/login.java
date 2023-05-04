@@ -98,20 +98,8 @@ public class login extends JFrame {
 						}
 						if(pera.getType() == type.CUSTOMER)
 						{
-							/*ovde proveriti da li je broj odradjenih treninga od prethodnog reporta >2. Poredjati listu po datumu, 
-							eliminisati termine u buducnosti i onda izvrsiti 3 poredjenja sa terminima na vrhu liste. 
-							 
-							Alternativno, rad sa vremenski bibliotekama bi se mogao izbeci ako bi se u model appointmenta dodala 
-							bool vrednost koja oznacava da li je trening uspesno odrzan, onda se proveri da li je ukupan broj
-							takvih treninga deljiv sa 3.
 							
-							Ako uspesno prodje provera->
-							
-							NewReport cpp = new NewReport(pera);
-							cpp.setVisible(true);
-							setVisible(false);
-							dispose();
-							ELSE->izvrsavanje koda ispod*/
+						
 							
 							UserVIew cpp = new UserVIew(pera);
 							cpp.setVisible(true);

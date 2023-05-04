@@ -49,6 +49,34 @@ public List<Coach> getAll() throws SQLException{
 			
 		return users;
 		}
+public List<String> getAllbyRating() throws SQLException{
+	
+	
+	
+	List <String> users = new ArrayList<String>();
+	
+	try{  
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con=DriverManager.getConnection(  
+		"jdbc:mysql://localhost:3306/sss","root","root");  
+
+		Statement stmt=con.createStatement();  
+		ResultSet rs=stmt.executeQuery("select coach.id,AVG(s.rating) from coach CROSS JOIN coachreting s  where s.id = coach.id and approved = true group by id order by AVG(s.rating) desc");  
+		
+		
+		while(rs.next())  
+		{
+			int i =1;
+			int id = rs.getInt(i++);
+			
+			users.add(a.getOne(id).getFirstname());
+		}
+		
+		con.close();  
+		}catch(Exception e){ System.out.println(e);}  
+		
+	return users;
+	}
 public List<Coach> getAllforApproval() throws SQLException, ClassNotFoundException{
 	
 	
