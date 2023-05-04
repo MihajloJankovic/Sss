@@ -83,6 +83,70 @@ public class DaoReport {
 		return null;  
 			
 	}
+	public List<Report> getAllByUser(int idd)
+	{
+		List<Report> reps= new ArrayList<Report>();
+		try{  
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection(  
+			"jdbc:mysql://localhost:3306/sss","root","root");  
+
+			PreparedStatement stmt=con.prepareStatement("SELECT * FROM report WHERE  user = ?;");  
+			stmt.setInt(1,idd);
+			ResultSet rs=stmt.executeQuery(); 
+			
+			int i =1;
+			while(rs.next())  
+			{
+				int id = rs.getInt(i++);
+				Double height = rs.getDouble(i++);
+				Double weight = rs.getDouble(i++);
+				String health = rs.getString(i++);
+				int user =rs.getInt(i++) ;
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				String date = rs.getString(i++) ;
+		        LocalDate localDate = LocalDate.parse(date, formatter);
+				
+				List<Props> props = new ArrayList<Props>();
+				List<Goal> goals = new ArrayList<Goal>();
+				
+				PreparedStatement stmt1=con.prepareStatement("SELECT goal FROM goals WHERE id=?;");  
+				stmt1.setInt(1,user);
+				ResultSet rs1=stmt1.executeQuery(); 
+				int g = 1;
+				while(rs1.next())  
+				{
+					
+					goals.add(Goal.valueOf(rs1.getString(g++)));
+					
+				
+					
+					
+				}
+				PreparedStatement stmt2=con.prepareStatement("SELECT goal FROM goals WHERE id=?;");  
+				stmt2.setInt(1,user);
+				ResultSet rs2=stmt1.executeQuery(); 
+				 g = 1;
+				while(rs2.next())  
+				{
+					
+					props.add(Props.valueOf(rs2.getString(g++)));
+					
+				
+					
+					
+				}
+				Report a = new Report(id, height, weight, health,goals,props,user,localDate);
+			   reps.add(a);
+				
+			}
+			
+			con.close();  
+			}catch(Exception e){ System.out.println(e);}
+		
+		return reps; 
+			
+	}
 	public int Save(double a,double b,String c,int d,List<Goal> goals,List<Props> props) throws ClassNotFoundException, SQLException
 	{
 		 
