@@ -61,7 +61,7 @@ public class UserVIew extends JFrame {
 		});
 		btnNewButton.setBounds(148, 100, 125, 56);
 		Report report =  daorepo.getOne(user.getId());
-			if(LocalDate.now().isAfter(report.getDate().plusDays(3)))
+			if(LocalDate.now().isAfter(report.getDate().plusDays(0)))
 				{
 		
 		contentPane.add(btnNewButton);

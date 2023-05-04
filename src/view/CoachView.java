@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import sss.model.Coach;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class CoachView extends JFrame {
@@ -70,8 +71,15 @@ public class CoachView extends JFrame {
 		JButton btnUserReports = new JButton("User Reports");
 		btnUserReports.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AllReports cpp=new AllReports();
+			allusersView cpp;
+			try {
+				cpp = new allusersView(coach);
 				cpp.setVisible(true);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+				
 			}
 		});
 		btnUserReports.setBounds(22, 96, 134, 21);

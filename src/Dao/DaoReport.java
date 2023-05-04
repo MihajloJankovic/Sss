@@ -46,27 +46,90 @@ public class DaoReport {
 				List<Props> props = new ArrayList<Props>();
 				List<Goal> goals = new ArrayList<Goal>();
 				
-				PreparedStatement stmt1=con.prepareStatement("SELECT goal FROM goals WHERE id=?;");  
+				PreparedStatement stmt1=con.prepareStatement("SELECT distinct goal FROM goals WHERE id=?;");  
 				stmt1.setInt(1,user);
 				ResultSet rs1=stmt1.executeQuery(); 
-				int g = 1;
+			
 				while(rs1.next())  
 				{
-					
-					goals.add(Goal.valueOf(rs1.getString(g++)));
+					int g = 1;
+					goals.add(Goal.valueOf(rs1.getString(g)));
 					
 				
 					
 					
 				}
-				PreparedStatement stmt2=con.prepareStatement("SELECT goal FROM goals WHERE id=?;");  
+				PreparedStatement stmt2=con.prepareStatement("SELECT distinct prop FROM props WHERE id=?;");  
 				stmt2.setInt(1,user);
-				ResultSet rs2=stmt1.executeQuery(); 
-				 g = 1;
+				ResultSet rs2=stmt2.executeQuery(); 
+				
 				while(rs2.next())  
 				{
+					 int h = 1;
+					props.add(Props.valueOf(rs2.getString(h)));
 					
-					props.add(Props.valueOf(rs2.getString(g++)));
+				
+					
+					
+				}
+				Report a = new Report(id, height, weight, health,goals,props,user,localDate);
+			   return a;
+				
+			}
+			
+			con.close();  
+			}catch(Exception e){ System.out.println(e);}
+		
+		return null;  
+			
+	}
+	public Report getOneByID(int idd)
+	{
+		try{  
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection(  
+			"jdbc:mysql://localhost:3306/sss","root","root");  
+
+			PreparedStatement stmt=con.prepareStatement("SELECT  * FROM report WHERE id= ?");  
+			stmt.setInt(1,idd);
+			ResultSet rs=stmt.executeQuery(); 
+			
+			int i =1;
+			while(rs.next())  
+			{
+				int id = rs.getInt(i++);
+				Double height = rs.getDouble(i++);
+				Double weight = rs.getDouble(i++);
+				String health = rs.getString(i++);
+				int user =rs.getInt(i++) ;
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				String date = rs.getString(i++) ;
+		        LocalDate localDate = LocalDate.parse(date, formatter);
+				
+				List<Props> props = new ArrayList<Props>();
+				List<Goal> goals = new ArrayList<Goal>();
+				
+				PreparedStatement stmt1=con.prepareStatement("SELECT  distinct goal FROM goals WHERE id=?;");  
+				stmt1.setInt(1,user);
+				ResultSet rs1=stmt1.executeQuery(); 
+			
+				while(rs1.next())  
+				{
+					int g = 1;
+					goals.add(Goal.valueOf(rs1.getString(g)));
+					
+				
+					
+					
+				}
+				PreparedStatement stmt2=con.prepareStatement("SELECT distinct prop FROM props WHERE id=?;");  
+				stmt2.setInt(1,user);
+				ResultSet rs2=stmt2.executeQuery(); 
+				
+				while(rs2.next())  
+				{
+					 int h = 1;
+					props.add(Props.valueOf(rs2.getString(h)));
 					
 				
 					
@@ -95,9 +158,10 @@ public class DaoReport {
 			stmt.setInt(1,idd);
 			ResultSet rs=stmt.executeQuery(); 
 			
-			int i =1;
+			
 			while(rs.next())  
 			{
+				int i =1;
 				int id = rs.getInt(i++);
 				Double height = rs.getDouble(i++);
 				Double weight = rs.getDouble(i++);
@@ -110,26 +174,26 @@ public class DaoReport {
 				List<Props> props = new ArrayList<Props>();
 				List<Goal> goals = new ArrayList<Goal>();
 				
-				PreparedStatement stmt1=con.prepareStatement("SELECT goal FROM goals WHERE id=?;");  
+				PreparedStatement stmt1=con.prepareStatement("SELECT distinct goal FROM goals WHERE id=?;");  
 				stmt1.setInt(1,user);
 				ResultSet rs1=stmt1.executeQuery(); 
-				int g = 1;
+				
 				while(rs1.next())  
 				{
-					
+					int g = 1;
 					goals.add(Goal.valueOf(rs1.getString(g++)));
 					
 				
 					
 					
 				}
-				PreparedStatement stmt2=con.prepareStatement("SELECT goal FROM goals WHERE id=?;");  
+				PreparedStatement stmt2=con.prepareStatement("SELECT distinct prop FROM props WHERE id=?;");  
 				stmt2.setInt(1,user);
-				ResultSet rs2=stmt1.executeQuery(); 
-				 g = 1;
+				ResultSet rs2=stmt2.executeQuery(); 
+				 
 				while(rs2.next())  
 				{
-					
+					int g = 1;
 					props.add(Props.valueOf(rs2.getString(g++)));
 					
 				
@@ -154,7 +218,7 @@ public class DaoReport {
 			Connection con=DriverManager.getConnection(  
 			"jdbc:mysql://localhost:3306/sss","root","root");  
 
-			PreparedStatement stmt=con.prepareStatement("INSERT INTO sss.report(`height`,`weight`,`healthstatus`,`user`)VALUES(?,?,?,?);", Statement.RETURN_GENERATED_KEYS);  
+			PreparedStatement stmt=con.prepareStatement("INSERT INTO sss.report(`height`,`weight`,`healthstatus`,`user`,`date`)VALUES(?,?,?,?,?);", Statement.RETURN_GENERATED_KEYS);  
 			stmt.setDouble(1,a);
 			stmt.setDouble(2,b);
 			stmt.setString(3,c);
@@ -167,7 +231,7 @@ public class DaoReport {
 			for (Goal goal : goals) {
 				
 				PreparedStatement stmt1=con.prepareStatement("INSERT INTO sss.goals(`id`,`goal`)VALUES(?,?);", Statement.RETURN_GENERATED_KEYS);  
-				stmt1.setInt(1,key);
+				stmt1.setInt(1,d);
 				stmt1.setString(2,goal.toString());
 	
 				
@@ -176,7 +240,7 @@ public class DaoReport {
 	for (Props goal : props) {
 				
 				PreparedStatement stmt1=con.prepareStatement("INSERT INTO sss.props(`id`,`prop`)VALUES(?,?);", Statement.RETURN_GENERATED_KEYS);  
-				stmt1.setInt(1,key);
+				stmt1.setInt(1,d);
 				stmt1.setString(2,goal.toString());
 	
 				

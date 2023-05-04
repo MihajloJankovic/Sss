@@ -37,6 +37,7 @@ public class UserAppointments extends JFrame {
 	 private JTable table;
 	static User user;
 	private JMenuBar menuBar;
+	
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	DaoCoach doacoach = new DaoCoach();

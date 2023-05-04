@@ -46,9 +46,10 @@ public class OneReport extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public OneReport(Report report) {
+	public OneReport(Report pera) {
+		this.report = pera;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 678, 302);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -107,12 +108,12 @@ public class OneReport extends JFrame {
 		
 		JLabel LabelGoals = new JLabel(report.getGoals().toString());
 		LabelGoals.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		LabelGoals.setBounds(129, 149, 297, 13);
+		LabelGoals.setBounds(129, 149, 511, 13);
 		contentPane.add(LabelGoals);
 		
 		JLabel LabelProps = new JLabel(report.getProps().toString());
 		LabelProps.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		LabelProps.setBounds(129, 172, 297, 13);
+		LabelProps.setBounds(129, 172, 511, 13);
 		contentPane.add(LabelProps);
 		
 		JLabel lblNewLabel_1 = new JLabel("Health status:");
@@ -124,6 +125,14 @@ public class OneReport extends JFrame {
 		LabelHealth.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		LabelHealth.setBounds(129, 76, 297, 13);
 		contentPane.add(LabelHealth);
+		
+		JLabel lblNewLabel_2 = new JLabel(String.valueOf(report.getHeight()));
+		lblNewLabel_2.setBounds(129, 103, 45, 13);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel(String.valueOf(report.getWeight()));
+		lblNewLabel_3.setBounds(129, 126, 45, 13);
+		contentPane.add(lblNewLabel_3);
 		
 		
 	}
