@@ -1,0 +1,11 @@
+package sss.model;
+
+public enum Goal {
+	
+	INCRASE_BODY_MASS,
+	BULKING_BODY,
+	CARDIO,
+	UPPER_LOWER_BACK_MUSCLES,
+	CHEST_MUSCLES
+
+}
