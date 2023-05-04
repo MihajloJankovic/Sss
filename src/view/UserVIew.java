@@ -6,16 +6,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Dao.DaoReport;
+import sss.model.Report;
 import sss.model.User;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 
 public class UserVIew extends JFrame {
 
 	private JPanel contentPane;
 	private static User user;
+	private DaoReport daorepo= new DaoReport();
 
 	/**
 	 * Launch the application.
@@ -45,7 +49,7 @@ public class UserVIew extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JButton btnNewButton = new JButton("New Report");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -56,8 +60,17 @@ public class UserVIew extends JFrame {
 			}
 		});
 		btnNewButton.setBounds(148, 100, 125, 56);
+		Report report =  daorepo.getOne(user.getId());
+			if(LocalDate.now().isAfter(report.getDate().plusDays(3)))
+				{
+		
 		contentPane.add(btnNewButton);
 		
+		
+		
+		
+				}
+			
 		JButton btnReserveAppointment = new JButton("Reserve Appointment");
 		btnReserveAppointment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

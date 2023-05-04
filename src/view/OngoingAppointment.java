@@ -43,7 +43,7 @@ public class OngoingAppointment extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OngoingAppointment frame = new OngoingAppointment(coach.getId());//nisam siguran da li je ovo tacno
+					OngoingAppointment frame = new OngoingAppointment(coach);//Nije tacno ja sam ispravio 
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +52,8 @@ public class OngoingAppointment extends JFrame{
 		});
 	}
 	
-	public OngoingAppointment(int idCoach) {
+	public OngoingAppointment(Coach pera) {
+		this.coach = pera;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 785, 420);
 		getContentPane().setLayout(null);
@@ -80,10 +81,10 @@ public class OngoingAppointment extends JFrame{
 		JButton ButtonEnd = new JButton("End ongoing session");
 		ButtonEnd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RateSession cpp=new RateSession(idCoach);
+				RateSession cpp=new RateSession(coach);
 				cpp.setVisible(true);			  
 				setVisible(false);
-				//dispose();nznm da li je neophodno
+		
 			}
 		});
 		ButtonEnd.setFont(new Font("Tahoma", Font.PLAIN, 16));

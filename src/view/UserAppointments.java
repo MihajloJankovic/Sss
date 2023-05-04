@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Dao.DaoAppointment;
+import Dao.DaoCoach;
 import Dao.DaoUser;
 import sss.model.Appointment;
 import sss.model.Coach;
@@ -37,6 +38,8 @@ public class UserAppointments extends JFrame {
 	static User user;
 	private JMenuBar menuBar;
 	private JButton btnNewButton;
+	private JButton btnNewButton_1;
+	DaoCoach doacoach = new DaoCoach();
 
 	/**
 	 * Launch the application.
@@ -68,6 +71,10 @@ public class UserAppointments extends JFrame {
 		btnNewButton = new JButton("Cancle");
 		
 		menuBar.add(btnNewButton);
+		
+		btnNewButton_1 = new JButton("Start");
+		
+		menuBar.add(btnNewButton_1);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -123,6 +130,40 @@ public class UserAppointments extends JFrame {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+					
+					
+	
+					
+					
+				}
+				
+			}
+		});
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				int red = kompozicijeTabela.getSelectedRow();
+				if(red == -1) {
+					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
+				}else {
+					String ID = tableModel.getValueAt(red, 0).toString();
+					
+					Appointment ab =  daoAp.getOne(Integer.valueOf(ID));
+					if(ab.getStartDateTime().minus(Duration.ofHours(1)).isBefore(LocalDateTime.now()))
+					{
+						OngoingAppointment cpp = new OngoingAppointment(ab.getCoach());
+						cpp.setVisible(true);
+					
+					}
+					else
+					{
+						String st = "Its not yet time come back 1 hour before appointment";
+						JOptionPane.showMessageDialog(null, st);
+					}
+					
+					dispose();
 					
 					
 	

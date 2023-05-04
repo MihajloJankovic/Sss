@@ -235,6 +235,58 @@ public class DaoAppointment {
 	
 			
 	}
+	public List<Appointment> getAllPay()
+	{
+		List<Appointment> s = new ArrayList<Appointment>();
+		try{  
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con=DriverManager.getConnection(  
+			"jdbc:mysql://localhost:3306/sss","root","root");  
+
+			PreparedStatement stmt=con.prepareStatement("select * from sss.appointment where reserved = 1 or canceled = 1 and StartDateTime <= NOW();");  
+			ResultSet rs=stmt.executeQuery(); 
+			
+
+			
+			
+			while(rs.next())  
+			{
+				int i =1;
+				int id = rs.getInt(i++);
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+				LocalDateTime date = LocalDateTime.parse(rs.getString(i++),formatter);
+				Coach pera = pera1.getOne(rs.getInt(i++));
+				int h = rs.getInt(i++);
+				User a = new User();
+				  if (rs.wasNull()) 
+				  {
+				  
+				  }
+				  else
+				  {
+					 a = p.getOne(h);
+				  }
+				
+				
+				Report b = p1.getOne(a.getId());
+				Client p = new Client(a, b);
+				Boolean r = Boolean.valueOf(rs.getString(i++));
+				Boolean c = Boolean.valueOf(rs.getString(i++));
+				int price = rs.getInt(i++);
+				
+				Appointment ab = new Appointment(id, date, pera, p, c, r,price);
+				
+			   s.add(ab);
+				
+			}
+			con.close();  
+			
+			return s;
+			}catch(Exception e){ System.out.println(e);return s; }
+		
+	
+			
+	}
 	public int Save(Appointment a) throws ClassNotFoundException, SQLException
 	{
 		 

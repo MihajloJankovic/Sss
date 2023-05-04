@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,10 @@ public class DaoReport {
 				Double weight = rs.getDouble(i++);
 				String health = rs.getString(i++);
 				int user =rs.getInt(i++) ;
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				String date = rs.getString(i++) ;
+		        LocalDate localDate = LocalDate.parse(date, formatter);
+				
 				List<Props> props = new ArrayList<Props>();
 				List<Goal> goals = new ArrayList<Goal>();
 				
@@ -66,7 +72,7 @@ public class DaoReport {
 					
 					
 				}
-				Report a = new Report(id, height, weight, health,goals,props,user);
+				Report a = new Report(id, height, weight, health,goals,props,user,localDate);
 			   return a;
 				
 			}
@@ -89,7 +95,7 @@ public class DaoReport {
 			stmt.setDouble(2,b);
 			stmt.setString(3,c);
 			stmt.setInt(4, d);
-			
+			stmt.setString(5, LocalDate.now().toString());
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();  
 			int key = rs.next() ? rs.getInt(1) : 0;

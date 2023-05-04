@@ -22,6 +22,13 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import Dao.DaoAppointment;
 import Dao.DaoUser;
+import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.awt.event.ActionEvent;
 
 public class CoachAppointments extends JFrame {
 
@@ -31,6 +38,8 @@ public class CoachAppointments extends JFrame {
 	DaoAppointment daoAp = new DaoAppointment();
 	 private JTable kompozicijeTabela;
 	 private JTable table;
+	 private JMenuBar menuBar;
+	 private JButton btnNewButton;
 	/**
 	 * Launch the application.
 	 */
@@ -55,6 +64,13 @@ public class CoachAppointments extends JFrame {
 		this.coach = pera;
 
 		setBounds(100, 100, 450, 300);
+		
+		menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		btnNewButton = new JButton("Start");
+		
+		menuBar.add(btnNewButton);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -84,6 +100,41 @@ public class CoachAppointments extends JFrame {
 		kompozicijeTabela = new JTable(tableModel);
 		JScrollPane scrollPane= new  JScrollPane(kompozicijeTabela);
 		contentPane.add(scrollPane);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+
+				int red = kompozicijeTabela.getSelectedRow();
+				if(red == -1) {
+					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
+				}else {
+					String ID = tableModel.getValueAt(red, 0).toString();
+					
+					Appointment ab =  daoAp.getOne(Integer.valueOf(ID));
+					if(ab.getStartDateTime().minus(Duration.ofHours(1)).isBefore(LocalDateTime.now()))
+					{
+						OngoingAppointmentCoach cpp = new OngoingAppointmentCoach();
+						cpp.setVisible(true);
+						
+					}
+					else
+					{
+						String st = "Its not yet time come back 1 hour before appointment";
+						JOptionPane.showMessageDialog(null, st);
+					}
+					
+					dispose();
+					
+					
+	
+					
+					
+				}
+				
+				
+			}
+		});
 	}
 
 }

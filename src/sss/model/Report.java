@@ -1,5 +1,6 @@
 package sss.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,13 @@ public class Report {
 	private int user;
 	private double height;
 	private double weight;
+	private LocalDate date;
+	public LocalDate getDate() {
+		return date;
+	}
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
 	private String HealthStatus;
 	List<Goal> goals = new ArrayList<Goal>();
 	List<Props> props = new ArrayList<Props>();
@@ -20,7 +28,7 @@ public class Report {
 		this.goals = goals;
 		this.props = props;
 	}
-	public Report(int id, double height, double weight, String healthStatus, List<Goal> goals, List<Props> props,int user) {
+	public Report(int id, double height, double weight, String healthStatus, List<Goal> goals, List<Props> props,int user,LocalDate A) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -29,6 +37,7 @@ public class Report {
 		HealthStatus = healthStatus;
 		this.goals = goals;
 		this.props = props;
+		this.date = A;
 	}
 	public int getUser() {
 		return user;

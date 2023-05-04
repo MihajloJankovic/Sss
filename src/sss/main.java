@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Dao.DaoPay;
 import Dao.DaoUser;
 import sss.model.Adress;
 import sss.model.Language;
@@ -28,6 +29,7 @@ public class main extends JFrame {
 	DaoUser userdao = new DaoUser();
 
 	private JPanel contentPane;
+	DaoPay a = new DaoPay();
 	
 
 	/**
@@ -56,13 +58,13 @@ public class main extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		a.AutoPay();
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				
+					
 				    login cppp = new login();
 					cppp.setVisible(true);
 					setVisible(false); //you can't see me!

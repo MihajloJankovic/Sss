@@ -41,14 +41,14 @@ public class RateSession extends JFrame {
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private static Coach coach;
-	/**
+	DaoCoach dao = new DaoCoach();	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RateSession frame = new RateSession(coach.getId());//nisam siguran da li je ovo tacno
+					RateSession frame = new RateSession(coach);//nisam siguran da li je ovo tacno
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,7 +60,8 @@ public class RateSession extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RateSession(int idCoach) { 
+	public RateSession(Coach pera) { 
+		this.coach = pera;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 402, 317);
@@ -120,8 +121,12 @@ public class RateSession extends JFrame {
 					ocena=5;
 				}
 				
-				//SaveRating(idCoach, ocena); verovatno propustam nesto jako ocigledno, ali nikako ne uspevam da ovo formulisem
-												//bez toga da izbaci error
+				try {
+					dao.SaveRating(coach.getId(), ocena);
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				setVisible(false);	
 				//dispose(); nznm da li je neophodno
 			}
