@@ -58,6 +58,39 @@ public class DaoPay {
 			
 			
 	}
+	
+		public void Delete()
+		{
+			try{  
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con=DriverManager.getConnection(  
+				"jdbc:mysql://localhost:3306/sss","root","root");  
+				List<Appointment> aps = dao.getAllPay();
+				for (Appointment appointment : aps) 
+				{
+					
+							PreparedStatement stmt=con.prepareStatement("delete from pay;", Statement.RETURN_GENERATED_KEYS);  
+							stmt.executeUpdate();
+				
+						
+				}
+				con.close(); 
+
+				
+				}
+				catch(Exception e){ System.out.println(e);}
+			
+			
+		
+				
+				
+				
+				
+				
+				
+				
+				
+		}
 
 	public List<String> BestCoaches()
 	{

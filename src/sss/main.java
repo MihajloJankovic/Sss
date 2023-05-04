@@ -14,6 +14,7 @@ import sss.model.Language;
 import sss.model.User;
 import view.login;
 import view.register;
+import view.registerCoach;
 
 import javax.swing.JButton;
 import java.awt.Font;
@@ -41,6 +42,18 @@ public class main extends JFrame {
 				try {
 					main frame = new main();
 					frame.setVisible(true);
+					frame.addWindowListener(new java.awt.event.WindowAdapter() {
+					    
+						@Override
+					    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+					    	
+					    	DaoPay a = new DaoPay();
+					    	a.Delete();
+					    	frame.dispose();
+					        
+					    }
+					});
+					 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,7 +65,7 @@ public class main extends JFrame {
 	 * Create the frame.
 	 */
 	public main() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 1002, 505);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -113,6 +126,18 @@ public class main extends JFrame {
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewButton_1.setBounds(375, 267, 190, 85);
 		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_1_1 = new JButton("Register Coach");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				 registerCoach cppp = new registerCoach();
+					cppp.setVisible(true);
+				
+			}
+		});
+		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton_1_1.setBounds(375, 373, 190, 85);
+		contentPane.add(btnNewButton_1_1);
 	}
-
 }

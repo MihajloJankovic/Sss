@@ -66,5 +66,9 @@ public class CoachView extends JFrame {
 		});
 		btnMyAppointments.setBounds(235, 27, 134, 21);
 		contentPane.add(btnMyAppointments);
+		
+		JButton btnUserReports = new JButton("User Reports");
+		btnUserReports.setBounds(22, 96, 134, 21);
+		contentPane.add(btnUserReports);
 	}
 }
