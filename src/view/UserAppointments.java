@@ -152,7 +152,7 @@ public class UserAppointments extends JFrame {
 					String ID = tableModel.getValueAt(red, 0).toString();
 					
 					Appointment ab =  daoAp.getOne(Integer.valueOf(ID));
-					if(ab.getStartDateTime().minus(Duration.ofHours(1)).isBefore(LocalDateTime.now()))
+					if(ab.getStartDateTime().minus(Duration.ofHours(1)).isBefore(LocalDateTime.now()) && ab.getStartDateTime().plus(Duration.ofHours(1)).isAfter(LocalDateTime.now()))
 					{
 						OngoingAppointment cpp = new OngoingAppointment(ab.getCoach());
 						cpp.setVisible(true);
@@ -164,7 +164,6 @@ public class UserAppointments extends JFrame {
 						JOptionPane.showMessageDialog(null, st);
 					}
 					
-					dispose();
 					
 					
 	

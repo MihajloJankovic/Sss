@@ -59,7 +59,7 @@ public class AllReports extends JFrame {
 	 */
 	public AllReports(User pera) {
 		this.user = pera;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 640, 400);
 		
 		JMenuBar menuBar = new JMenuBar();

@@ -60,7 +60,7 @@ public class allusersView extends JFrame {
 	 * @throws SQLException 
 	 */
 	public allusersView(Coach pera) throws SQLException {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		this.coach = pera;
 		
